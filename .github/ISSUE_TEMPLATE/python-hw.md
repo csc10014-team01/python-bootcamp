@@ -5,8 +5,8 @@ title: "[W1] Python homework - <username>"
 labels: python-hw
 ---
 
-Week: w1
-Member: @<your-github-username> (No. X)
+Week: w1  
+Member: @<your-github-username> (No. X)  
 Reviewer (rotation): @<reviewer-username>
 
 - [ ] W1-1
@@ -15,5 +15,5 @@ Reviewer (rotation): @<reviewer-username>
 - [ ] W1-4
 - [ ] W1-5
 
-Estimated hours: 
+Estimated hours:  
 Actual hours:
