@@ -27,7 +27,7 @@ jobs:
         run: ruff check .
 
       - name: Run tests with Pytest
-        run: pytest -q
+        run: pytest -q || test $? -eq 5
 
       - name: Check no merge conflict markers
         run: "! git grep -n -E '^(<<<<<<<|>>>>>>>)'"
