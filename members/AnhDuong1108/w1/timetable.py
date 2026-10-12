@@ -5,6 +5,6 @@ def by_day(schedule: list[tuple[str, str]]) -> dict[str, list[str]]:
         if day not in day_dict:
             day_dict[day] = []
         day_dict[day].append(name)
-    for day in day_dict:
-        day_dict[day].sort()
+    for day, value in day_dict.items():
+        value.sort()
     return day_dict

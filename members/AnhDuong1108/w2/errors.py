@@ -1,4 +1,3 @@
-from members.AnhDuong1108.w2.models import Task
 
 class InfeasiblePlan(Exception):
     def __init__(self, needed_h, available_h):

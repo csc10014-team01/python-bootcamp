@@ -1,7 +1,7 @@
 from pathlib import Path
 
+from .errors import InfeasiblePlan, check_feasible
 from .io_utils import load_tasks
-from .errors import check_feasible, InfeasiblePlan
 
 
 def read_path(filename, available_h: float, repo_root: Path):

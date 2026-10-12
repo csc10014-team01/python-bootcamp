@@ -1,5 +1,7 @@
-from members.AnhDuong1108.w2.models import Task
 import csv
+
+from members.AnhDuong1108.w2.models import Task
+
 
 def load_tasks(path) -> list[Task]:
     tasks = []
