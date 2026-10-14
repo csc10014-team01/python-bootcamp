@@ -8,7 +8,7 @@ def by_day(
     for course, day in entries:
         result.setdefault(day, []).append(course)
 
-    for day in result:
-        result[day].sort()
+    for courses in result.values():
+        courses.sort()
 
     return result
