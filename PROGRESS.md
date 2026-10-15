@@ -2,12 +2,12 @@
 
 | Member | Week | Issue | PR | Reviewer | Tests | Hours |
 |:---|:---:|:---:|:---:|:---|:---:|:---:|
-| @nghi277 | w1 | - | - | @dknhu | N/A | - |
-| @dknhu | w1 | - | - | @AnhDuong1108 | N/A | - |
-| @AnhDuong1108 | w1 | - | - | @MariiiMariii-tech | N/A | - |
-| @MariiiMariii_tech | w1 | - | - | @Kongmink | N/A | - |
-| @Kongmink | w1 | - | - | @lehthuong2201-coder | N/A | - |
-| @lehthuong2201_coder | w1 | - | - | @nghi277 | N/A | - |
+| @nghi277 | w1 | 19 | 10 | @dknhu | N/A | 3 |
+| @dknhu | w1 | 20 | 12 | @AnhDuong1108 | N/A | 3 |
+| @AnhDuong1108 | w1 | 17 | 7 | @MariiiMariii-tech | N/A | 3 |
+| @MariiiMariii_tech | w1 | 21 | 18 | @Kongmink | N/A | 2 |
+| @Kongmink | w1 | 22 | 11 | @lehthuong2201-coder | N/A | 3 |
+| @lehthuong2201_coder | w1 | 16 | 9 | @nghi277 | N/A | 4 |
 
 
 > **Ghi chú:**
