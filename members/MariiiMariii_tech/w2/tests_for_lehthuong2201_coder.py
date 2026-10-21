@@ -1,5 +1,6 @@
 import sys
 from pathlib import Path
+
 # pyrefly: ignore[missing-import]
 import pytest
 
@@ -7,7 +8,14 @@ BOOTCAMP = Path(__file__).resolve().parents[3]
 if str(BOOTCAMP) not in sys.path:
     sys.path.insert(0, str(BOOTCAMP))
 
-from members.lehthuong2201_coder.w1 import grades, text_tools, rules, translate, timetable
+from members.lehthuong2201_coder.w1 import (
+    grades,
+    rules,
+    text_tools,
+    timetable,
+    translate,
+)
+
 
 # grades.summary
 def test_summary_typical():

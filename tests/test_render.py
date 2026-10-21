@@ -1,7 +1,8 @@
 from datetime import date
 
-from shared.contract import Task, Block
+from shared.contract import Block, Task
 from shared.study_planner.render import render
+
 
 def test_render_one_block():
     task = Task("Math", 5, 2.0, date(2026, 10, 30))

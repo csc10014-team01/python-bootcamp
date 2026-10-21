@@ -1,5 +1,6 @@
 from .models import Task
 
+
 class InfeasiblePlan(Exception):
     def __init__(self, needed_h, available_h):
         self.needed_h = needed_h

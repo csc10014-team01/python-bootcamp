@@ -1,5 +1,6 @@
 from shared.contract import Block
 
+
 def render(blocks: list[Block]) -> str:
     if not blocks:
         return "No study blocks planned."
