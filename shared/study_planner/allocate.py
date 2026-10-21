@@ -1,4 +1,5 @@
-from shared.contract import Task, Block
+from shared.contract import Block
+
 
 def allocate(tasks, hours) -> list[Block]:
     if hours < 0:
