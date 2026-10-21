@@ -1,0 +1,56 @@
+# ==========================================
+# 1. Bytecode & Cache của Python (Rất quan trọng)
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# ==========================================
+# 2. Môi trường ảo (Virtual Environments)
+# ==========================================
+.venv/
+venv/
+env/
+ENV/
+
+# ==========================================
+# 3. Bảo mật & Biến môi trường (Chống lộ secret)
+# ==========================================
+.env
+.env.*
+!.env.example
+
+# ==========================================
+# 4. Cơ sở dữ liệu & Dữ liệu nhạy cảm
+# ==========================================
+*.sqlite
+*.sqlite3
+*.db
+data/raw/
+data/private/
+
+# ==========================================
+# 5. File cấu hình của Trình soạn thảo (IDE)
+# ==========================================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ==========================================
+# 6. File rác của Hệ điều hành (Windows / macOS)
+# ==========================================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ==========================================
+# 7. Build & Distribution artifacts
+# ==========================================
+dist/
+build/
+*.egg-info/
+node_modules/
