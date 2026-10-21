@@ -1,5 +1,8 @@
-from pathlib import Path
+# ruff: noqa: N999
+
 import sys
+from pathlib import Path
+
 import pytest
 
 ROOT_DIR = Path(__file__).resolve().parents[3]
@@ -8,9 +11,10 @@ if str(ROOT_DIR) not in sys.path:
 
 from members.AnhDuong1108.w1.grades import summary
 from members.AnhDuong1108.w1.rules import can_register_thesis, missing
-from members.AnhDuong1108.w1.text_tools import top_k, word_count
+from members.AnhDuong1108.w1.text_tools import word_count
 from members.AnhDuong1108.w1.timetable import by_day
 from members.AnhDuong1108.w1.translate import insertion_sort
+
 
 def test_grades_summary_normal():
   res = summary([7.0, 8.0, 9.0])

@@ -1,7 +1,8 @@
-from pathlib import Path
 import sys
+from pathlib import Path
 
 from .io_utils import load_tasks
+
 
 def main():
   if len(sys.argv) > 1:
