@@ -19,7 +19,7 @@ def load_tasks(path: str) -> list[Task]:
                 
                 tasks.append(Task(title, importance, effort_h, deadline))
                 
-            except Exception as e:
+            except Exception as e:  # noqa: BLE001
                 raise ValueError(f"Lỗi ở dòng {reader.line_num}: {e}")
                 
     return tasks
