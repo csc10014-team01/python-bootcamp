@@ -1,18 +1,21 @@
-""" chạy: pytest -v tests_for_Kongmink.py"""
+# ruff: noqa: N999
+"""Tests for Kongmink's W1 functions."""
+""" pytest -v tests_for_Kongmink.py"""
 
-import pytest
 import sys
 from pathlib import Path
+
+import pytest
 
 ROOT_DIR = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT_DIR))
 
-
-from members.Kongmink.w1.translate import selection_sort
-from members.Kongmink.w1.timetable import by_day
-from members.Kongmink.w1.text_tool import word_count, top_k
-from members.Kongmink.w1.rules import can_register_thesis, missing
 from members.Kongmink.w1.grades import summary
+from members.Kongmink.w1.rules import can_register_thesis, missing
+from members.Kongmink.w1.text_tool import top_k, word_count
+from members.Kongmink.w1.timetable import by_day
+from members.Kongmink.w1.translate import selection_sort
+
 # ---------- grade.py ----------
 
 def test_summary_returns_correct_statistics():
