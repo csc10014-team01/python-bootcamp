@@ -1,4 +1,4 @@
-from .models import Task 
+from .models import Task
 
 class InfeasiblePlan(Exception):
     def __init__(self, needed_h: float, available_h: float):

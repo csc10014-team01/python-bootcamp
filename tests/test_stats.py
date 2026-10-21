@@ -1,5 +1,4 @@
-import pytest
-from shared.contract import Task, Block
+from shared.contract import Block, Task
 from shared.study_planner.stats import plan_stats
 
 

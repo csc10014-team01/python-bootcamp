@@ -1,6 +1,7 @@
 from pathlib import Path
+
+from .errors import InfeasiblePlan, check_feasible
 from .io_utils import load_tasks
-from .errors import check_feasible, InfeasiblePlan
 
 def read(filename: str, available_h: float):
     csv_path = Path(__file__).parent / filename
