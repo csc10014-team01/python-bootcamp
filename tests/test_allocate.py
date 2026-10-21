@@ -2,7 +2,7 @@ from datetime import date
 
 import pytest
 
-from shared.contract import Task, Block
+from shared.contract import Task
 from shared.study_planner.allocate import allocate
 
 """ dùng  python -m pytest tests/test_allocate.py -v để chạy test """
