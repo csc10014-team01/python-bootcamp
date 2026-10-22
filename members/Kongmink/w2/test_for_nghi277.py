@@ -1,6 +1,5 @@
 import pytest
-from your_module import top_k, word_count  # Thay 'your_module' bằng tên file chứa hàm của Babi
-
+from members.nghi277.w1.text_tools import top_k, word_count
 
 # ==========================================
 # Tests for word_count
