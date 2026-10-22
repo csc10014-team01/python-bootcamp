@@ -27,7 +27,4 @@ def validate_tasks(tasks: list[Task], available_h: float) -> bool:
         total_effort += task.effort_h
 
     # Kiểm tra tổng thời gian có vượt quá số giờ cho phép không
-    if total_effort > available_h:
-        return False
-
-    return True
+    return total_effort <= available_h
