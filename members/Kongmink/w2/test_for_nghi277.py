@@ -1,4 +1,3 @@
-import pytest
 from members.nghi277.w1.text_tools import top_k, word_count
 
 # ==========================================

@@ -1,5 +1,5 @@
 from datetime import date
-import pytest
+
 from shared.contract import Task
 from shared.study_planner.validate import validate_tasks
 
