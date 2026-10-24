@@ -1,13 +1,12 @@
 import argparse
-import sys
 from datetime import date
 from pathlib import Path
-
-from shared.study_planner.prioritise import prioritise
+import sys
 
 from members.Kongmink.w2.io_utils import load_tasks
 from shared.contract import Block
 from shared.study_planner.allocate import allocate
+from shared.study_planner.prioritise import prioritise
 
 
 def format_cli_output(blocks: list[Block], total_hours: float) -> str:
