@@ -60,6 +60,6 @@ def parse_csv(path: str | Path) -> list[Task]:
       except (ValueError, IndexError) as exc:
         raise ValueError(f"Error parsing task at line {line_num}: {exc}")
   if not tasks:
-      raise ValueError("CSV file has no task data.")
+      return []
 
   return tasks

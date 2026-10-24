@@ -47,14 +47,16 @@ def test_allocate_partial_task():
     assert blocks[0].hours == 1.5
 
 
-def test_higher_importance_first():
+def test_allocate_preserves_input_order():
     low = make_task("English", 2, 1)
     high = make_task("Math", 5, 2)
 
     blocks = allocate([low, high], 2)
 
-    assert blocks[0].task == high
-    assert blocks[0].hours == 2
+    assert blocks[0].task == low
+    assert blocks[0].hours == 1
+    assert blocks[1].task == high
+    assert blocks[1].hours == 1
 
 
 def test_no_hours_left_for_later_tasks():
