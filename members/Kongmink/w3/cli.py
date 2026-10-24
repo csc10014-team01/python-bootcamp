@@ -1,7 +1,7 @@
 import argparse
+import sys
 from datetime import date
 from pathlib import Path
-import sys
 
 from members.Kongmink.w2.io_utils import load_tasks
 from shared.contract import Block
