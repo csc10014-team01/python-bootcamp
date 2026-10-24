@@ -29,7 +29,10 @@ def parse_csv(path: str | Path) -> list[Task]:
   tasks: list[Task] = []
   with open(csv_file, mode="r", encoding="utf-8") as f:
     reader = csv.reader(f)
-    next(reader, None)
+
+    header = next(reader, None)
+    if header is None:
+        raise ValueError("CSV file is empty.")
 
     for line_num, row in enumerate(reader, start=2):
       if not row or not any(field.strip() for field in row):
@@ -56,5 +59,7 @@ def parse_csv(path: str | Path) -> list[Task]:
         tasks.append(task)
       except (ValueError, IndexError) as exc:
         raise ValueError(f"Error parsing task at line {line_num}: {exc}")
+  if not tasks:
+      raise ValueError("CSV file has no task data.")
 
   return tasks

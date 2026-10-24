@@ -1,20 +1,22 @@
-from shared.contract import Block
+from shared.contract import Task, Block
+from shared.study_planner.exceptions import InfeasiblePlan
 
 
-def allocate(tasks, hours) -> list[Block]:
+def allocate(tasks: list[Task], hours: float) -> list[Block]:
     if hours < 0:
         raise ValueError("hours must be non-negative")
 
-    sorted_tasks = sorted(tasks, key=lambda task: task.importance, reverse=True)
-    blocks = []
+    blocks: list[Block] = []
     remain_hours = hours
 
-    for task in sorted_tasks:
-        if task.effort_h <= remain_hours:
-            blocks.append(Block(task=task, hours=task.effort_h))
-            remain_hours -= task.effort_h
-        elif remain_hours > 0:
-            blocks.append(Block(task = task, hours = remain_hours))
-            remain_hours = 0
+    for task in tasks:
+        if remain_hours <= 0:
+            break
+
+        allocated = min(task.effort_h, remain_hours)
+
+        if allocated > 0:
+            blocks.append(Block(task=task, hours=allocated))
+            remain_hours -= allocated
 
     return blocks
