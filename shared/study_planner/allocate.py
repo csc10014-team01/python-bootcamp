@@ -1,5 +1,4 @@
-from shared.contract import Task, Block
-from shared.study_planner.exceptions import InfeasiblePlan
+from shared.contract import Block, Task
 
 
 def allocate(tasks: list[Task], hours: float) -> list[Block]:

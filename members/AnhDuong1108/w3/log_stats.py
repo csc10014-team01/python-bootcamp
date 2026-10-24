@@ -1,6 +1,7 @@
 import math
 from collections import Counter
 
+
 def calculate_p95(latencies):
     sorted_latencies = sorted(latencies)
 
