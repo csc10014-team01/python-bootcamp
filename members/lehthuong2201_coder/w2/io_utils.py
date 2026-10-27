@@ -7,6 +7,7 @@ from .models import Task
 
 
 def load_tasks(path: str) -> list[Task]:
+    """Load and validate a list of Task objects from a CSV file."""
     tasks = []
     with open(path, mode='r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
@@ -26,6 +27,7 @@ def load_tasks(path: str) -> list[Task]:
     return tasks
 
 def save_json(tasks: list[Task], path: str):
+    """Export a list of Task objects to a formatted JSON file."""
     def task_to_dict(t: Task):
         d = asdict(t) 
         d['deadline'] = d['deadline'].strftime("%Y-%m-%d")
