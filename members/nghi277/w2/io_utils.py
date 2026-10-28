@@ -1,11 +1,15 @@
+"""Read task CSV files and write task JSON files."""
+
 import csv
 import json
 from datetime import date
+from os import PathLike
 
 from .models import Task
 
 
-def load_tasks(path) -> list[Task]:
+def load_tasks(path: str | PathLike[str]) -> list[Task]:
+    """Load tasks from CSV, reporting the line number of invalid rows."""
     tasks = []
 
     with open(path, "r", newline="", encoding="utf-8") as file:
@@ -33,26 +37,25 @@ def load_tasks(path) -> list[Task]:
                     title=title,
                     importance=importance,
                     effort_h=effort_h,
-                    deadline=deadline
+                    deadline=deadline,
                 )
 
                 tasks.append(task)
 
             except (ValueError, TypeError) as e:
-                raise ValueError(
-                    f"Invalid row at line {line_num}: {e}"
-                ) from e
+                raise ValueError(f"Invalid row at line {line_num}: {e}") from e
 
     return tasks
 
 
-def save_json(tasks: list[Task], path) -> None:
+def save_json(tasks: list[Task], path: str | PathLike[str]) -> None:
+    """Save tasks as UTF-8 JSON with ISO-formatted deadlines."""
     data = [
         {
             "title": task.title,
             "importance": task.importance,
             "effort_h": task.effort_h,
-            "deadline": task.deadline.isoformat()
+            "deadline": task.deadline.isoformat(),
         }
         for task in tasks
     ]
