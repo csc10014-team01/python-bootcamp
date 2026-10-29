@@ -1,0 +1,43 @@
+name: dknhu homework
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "members/dknhu/**"
+      - "tests/**"
+      - "shared/**"
+      - "docs/**"
+      - "PROGRESS.md"
+      - ".github/workflows/dknhu.yml"
+  push:
+    branches: [main]
+    paths:
+      - "members/dknhu/**"
+      - "tests/**"
+      - "shared/**"
+      - "docs/**"
+      - "PROGRESS.md"
+      - ".github/workflows/dknhu.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  dknhu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install test tools
+        run: python -m pip install pytest ruff
+      - name: Check dknhu code style
+        run: python -m ruff check members/dknhu
+      - name: Run dknhu instructor tests and regression tests
+        run: >-
+          python -m pytest -q tests/test_w1.py tests/test_w2.py tests/test_w3.py
+          tests/test_dknhu_w2.py tests/test_prioritise.py
+          tests/test_study_planner_e2e.py members/dknhu/w3
+          --member dknhu --variant 3
