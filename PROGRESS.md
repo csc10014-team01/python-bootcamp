@@ -5,6 +5,7 @@
 | @nghi277 | w1 | 19 | 10 | @dknhu | N/A | 3 |
 | @dknhu | w1 | 20 | 12 | @AnhDuong1108 | N/A | 3 |
 | @dknhu | w2 | N/A | 45 | Week B: pending confirmation | 32 pass; peer 25 pass / 1 fail | N/A |
+| @dknhu | w3 | N/A | [46](https://github.com/csc10014-team01/python-bootcamp/pull/46); T-W3: [40](https://github.com/csc10014-team01/python-bootcamp/pull/40) | Week C: pending confirmation | 142 pass | N/A |
 | @AnhDuong1108 | w1 | 17 | 7 | @MariiiMariii-tech | N/A | 3 |
 | @MariiiMariii_tech | w1 | 21 | 18 | @Kongmink | N/A | 2 |
 | @Kongmink | w1 | 22 | 11 | @lehthuong2201-coder | N/A | 3 |

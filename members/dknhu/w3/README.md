@@ -56,7 +56,7 @@ Python/C++ reflection (three lines, also included in the PR):
 
 ## Progress and review evidence
 
-W2 individual work was merged in [PR #45](https://github.com/csc10014-team01/python-bootcamp/pull/45), and T-W3 work in PR #40. W3 still needs the assigned reviewer's approval and merging; the Week C reviewer and actual hours have not been supplied. Review comments should include a concrete Question, Suggestion, and Praise after reading the assigned teammate's code.
+W2 individual work was merged in [PR #45](https://github.com/csc10014-team01/python-bootcamp/pull/45), and T-W3 work in PR #40. W3 individual work is in [draft PR #46](https://github.com/csc10014-team01/python-bootcamp/pull/46) and still needs the assigned reviewer's approval and merging; the Week C reviewer and actual hours have not been supplied. Review comments should include a concrete Question, Suggestion, and Praise after reading the assigned teammate's code.
 
 The commits made in this session share the real work date. They do not claim work spread over several days. Team completion tags should only be created after all team deliverables meet the course criteria.
 

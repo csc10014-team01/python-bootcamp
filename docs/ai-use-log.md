@@ -83,6 +83,7 @@ The source-code modifications were AI-assisted. My contribution focused on ident
 - Date: 2026-10-29.
 - Tool: OpenAI Codex.
 - Branch: `py/w3-dknhu`.
+- PR: [#46](https://github.com/csc10014-team01/python-bootcamp/pull/46), draft for review.
 - Prompt summary: dknhu asked Codex to continue their work against the supplied Week 3, progress-tracking, review, and AI-disclosure requirements.
 - Generated code retained: the date parser, route statistics, study CLI, tests, and README under `members/dknhu/w3/`; a dedicated `.github/workflows/dknhu.yml` running the instructor's tests with the correct member/variant; type hints, docstrings, and formatting changes in dknhu's earlier code and tests.
 - Other generated material retained: this log entry, the retrospective W2 disclosure, the W3 progress entry, and the W3 PR description including the three-line Python/C++ comparison.
