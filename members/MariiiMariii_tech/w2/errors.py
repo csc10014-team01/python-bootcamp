@@ -13,6 +13,7 @@ class InfeasiblePlan(Exception):
             f"but only {self.available_h} hours available."
         )
 
+
 def check_feasible(tasks: list[Task], available_h: float):
     needed_h = sum(task.effort_h for task in tasks)
 

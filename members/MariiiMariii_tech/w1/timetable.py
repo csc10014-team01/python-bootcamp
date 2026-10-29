@@ -11,10 +11,6 @@ def by_day(timetable: list[tuple[str, str]]) -> dict[str, list[str]]:
 
 
 if __name__ == "__main__":
-    timetable = [
-        ("CSC10014", "Mon"),
-        ("MTH00003", "Tue"),
-        ("CSC10001", "Mon")
-    ]
+    timetable = [("CSC10014", "Mon"), ("MTH00003", "Tue"), ("CSC10001", "Mon")]
 
     print(by_day(timetable))

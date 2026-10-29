@@ -14,4 +14,5 @@ def missing(credits: int, gpa: float) -> list[str]:
 
     return reasons
 
+
 print(missing(118, 2.5))
