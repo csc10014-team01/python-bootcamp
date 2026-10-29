@@ -4,7 +4,7 @@ from datetime import date
 
 import pytest
 
-from .dates import parse_due
+from members.dknhu.w3.dates import parse_due
 
 
 @pytest.mark.parametrize(

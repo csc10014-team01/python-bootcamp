@@ -5,7 +5,7 @@ from math import inf, nan
 
 import pytest
 
-from .log_stats import analyse
+from members.dknhu.w3.log_stats import analyse
 
 
 def test_p95_uses_nearest_rank_instead_of_the_maximum() -> None:
