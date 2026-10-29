@@ -7,7 +7,6 @@ import pytest
 
 from shared.contract import Task
 from shared.study_planner.allocate import allocate
-from shared.study_planner.exceptions import InfeasiblePlan
 from shared.study_planner.parse import parse_csv
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
