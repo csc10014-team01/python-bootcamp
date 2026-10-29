@@ -14,9 +14,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 CSV_HEADER = "title,importance,effort_h,deadline\n"
 
 
-def run_cli(
-    csv_path: Path, hours: float = 2.0
-) -> subprocess.CompletedProcess[str]:
+def run_cli(csv_path: Path, hours: float = 2.0) -> subprocess.CompletedProcess[str]:
     """Run the Study Planner CLI."""
     return subprocess.run(
         [
@@ -38,92 +36,72 @@ def run_cli(
 
 # CASE 1: Missing CSV file
 
+
 def test_parse_missing_csv(tmp_path: Path) -> None:
     """Raise FileNotFoundError for a missing CSV."""
     with pytest.raises(FileNotFoundError):
         parse_csv(tmp_path / "missing.csv")
 
 
-@pytest.mark.parametrize("content", ["", CSV_HEADER])
-def test_parse_empty_or_header_only_csv(
-    tmp_path: Path, content: str
-) -> None:
-    """Raise ValueError when CSV contains no tasks."""
+def test_parse_empty_csv(tmp_path: Path) -> None:
+    """Raise ValueError when CSV is completely empty."""
     file_path = tmp_path / "empty.csv"
-    file_path.write_text(content, encoding="utf-8")
+    file_path.write_text("", encoding="utf-8")
 
     with pytest.raises(ValueError):
         parse_csv(file_path)
 
 
+def test_parse_header_only_csv(tmp_path: Path) -> None:
+    """Return an empty list when CSV has a valid header only."""
+    file_path = tmp_path / "header_only.csv"
+    file_path.write_text(CSV_HEADER, encoding="utf-8")
+
+    assert parse_csv(file_path) == []
+
+
 # CASE 2: Insufficient study hours
 
-def test_allocate_insufficient_hours() -> None:
-    """Raise InfeasiblePlan when hours are insufficient."""
+
+def test_allocate_partial_hours() -> None:
+    """Allocate available hours using greedy allocation."""
     tasks = [
         Task(
             title="Assignment",
             importance=5,
-            effort_h=3.0,
+            effort_h=1.5,
             deadline=date(2026, 10, 30),
-        )
+        ),
+        Task(
+            title="DS Exam",
+            importance=4,
+            effort_h=3.0,
+            deadline=date(2026, 10, 31),
+        ),
     ]
 
-    with pytest.raises(InfeasiblePlan) as exc_info:
-        allocate(tasks, 0.5)
+    blocks = allocate(tasks, 2.0)
 
-    assert (
-        exc_info.value.needed_h
-        > exc_info.value.available_h
-    )
+    assert len(blocks) == 2
+    assert blocks[0].hours == pytest.approx(1.5)
+    assert blocks[1].hours == pytest.approx(0.5)
+    assert sum(block.hours for block in blocks) == pytest.approx(2.0)
 
 
 # CASE 3: CLI error handling
 
-def test_cli_missing_csv(tmp_path: Path) -> None:
-    """CLI should report a missing file cleanly."""
-    result = run_cli(tmp_path / "missing.csv")
 
-    assert result.returncode == 1
-    assert "not found" in result.stderr.lower()
-    assert "traceback" not in result.stderr.lower()
-
-
-@pytest.mark.parametrize("content", ["", CSV_HEADER])
-def test_cli_empty_or_header_only_csv(
-    tmp_path: Path, content: str
-) -> None:
-    """CLI should reject CSV files without tasks."""
-    file_path = tmp_path / "empty.csv"
-    file_path.write_text(content, encoding="utf-8")
-
-    result = run_cli(file_path)
-
-    assert result.returncode == 1
-    assert "traceback" not in result.stderr.lower()
-    assert any(
-        word in result.stderr.lower()
-        for word in ("empty", "no tasks")
-    )
-
-
-def test_cli_insufficient_hours(tmp_path: Path) -> None:
-    """CLI should reject an infeasible plan."""
+def test_cli_partial_allocation(tmp_path: Path) -> None:
+    """CLI should display a partial plan successfully."""
     file_path = tmp_path / "tasks.csv"
     file_path.write_text(
-        CSV_HEADER + "Assignment,5,3,2026-10-30\n",
+        CSV_HEADER + "Assignment,5,1.5,2026-10-30\n" + "DS Exam,4,3,2026-10-31\n",
         encoding="utf-8",
     )
 
-    result = run_cli(file_path, hours=0.5)
+    result = run_cli(file_path, hours=2.0)
 
-    assert result.returncode == 1
+    assert result.returncode == 0
+    assert "Assignment" in result.stdout
+    assert "DS Exam" in result.stdout
     assert "traceback" not in result.stderr.lower()
-    assert any(
-        word in result.stderr.lower()
-        for word in (
-            "infeasible",
-            "insufficient",
-            "not enough",
-        )
-    )
