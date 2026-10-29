@@ -20,6 +20,7 @@ def top_k(text: str, k: int) -> list[tuple[str, int]]:
 
     items.sort(key=lambda x: (-x[1], x[0]))
 
-    return items[:max(k, 0)]
+    return items[: max(k, 0)]
+
 
 print(top_k("Git is fun. Git is fast!", 2))
