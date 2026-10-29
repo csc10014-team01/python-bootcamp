@@ -1,3 +1,6 @@
+"""Check thesis registration requirements and describe missing qualifications."""
+
+
 def can_register_thesis(credits: int, gpa: float) -> bool:
     """Check both requirements for thesis registration."""
     return credits >= 120 and gpa >= 2.0

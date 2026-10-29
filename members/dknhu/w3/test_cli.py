@@ -13,7 +13,9 @@ from members.dknhu.w3 import cli
 BOOTCAMP = Path(__file__).resolve().parents[3]
 TODAY = date(2026, 10, 26)
 SAMPLE = BOOTCAMP / "samples" / "tasks.csv"
-EXPECTED = "Tonight (2.0 h):\n  1. Assignment ........ 1.5 h\n  2. DS exam ........... 0.5 h\n"
+EXPECTED = (
+    "Tonight (2.0 h):\n  1. Assignment ........ 1.5 h\n  2. DS exam ........... 0.5 h\n"
+)
 
 
 def test_plan_prioritises_and_partially_allocates_without_mutation() -> None:
@@ -52,8 +54,16 @@ def test_plan_rejects_invalid_task_effort(effort: float) -> None:
 def test_module_cli_matches_the_assignment_example() -> None:
     """Run the real module with the fixed date and the sample CSV."""
     result = subprocess.run(
-        [sys.executable, "-m", "members.dknhu.w3.cli", str(SAMPLE),
-         "--hours", "2", "--today", TODAY.isoformat()],
+        [
+            sys.executable,
+            "-m",
+            "members.dknhu.w3.cli",
+            str(SAMPLE),
+            "--hours",
+            "2",
+            "--today",
+            TODAY.isoformat(),
+        ],
         cwd=BOOTCAMP,
         capture_output=True,
         text=True,
@@ -76,7 +86,9 @@ def test_missing_file_returns_one_with_a_clear_message(
     assert "file not found" in captured.err and "missing.csv" in captured.err
 
 
-@pytest.mark.parametrize("content", ["", "title,importance,effort_h,deadline\nBad,9,1,2026-10-30\n"])
+@pytest.mark.parametrize(
+    "content", ["", "title,importance,effort_h,deadline\nBad,9,1,2026-10-30\n"]
+)
 def test_invalid_csv_returns_one(
     tmp_path: Path, capsys: pytest.CaptureFixture[str], content: str
 ) -> None:
@@ -91,9 +103,13 @@ def test_invalid_csv_returns_one(
 
 @pytest.mark.parametrize(
     "options",
-    [["--hours", "-1"], ["--hours", "nan"], ["--hours", "inf"],
-     ["--hours", "2", "--today", "2026-02-30"],
-     ["--hours", "2", "--today", "20261026"]],
+    [
+        ["--hours", "-1"],
+        ["--hours", "nan"],
+        ["--hours", "inf"],
+        ["--hours", "2", "--today", "2026-02-30"],
+        ["--hours", "2", "--today", "20261026"],
+    ],
 )
 def test_bad_cli_options_use_argparse_errors(options: list[str]) -> None:
     """Invalid options exit with argparse's standard status two."""
@@ -106,6 +122,7 @@ def test_today_defaults_to_the_current_date(
     monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
     """Freeze only the clock to verify the default date affects priority."""
+
     class FixedDate(date):
         """Supply a deterministic clock for the CLI's default option."""
 

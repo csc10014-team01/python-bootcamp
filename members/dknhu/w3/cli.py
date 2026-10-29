@@ -46,7 +46,9 @@ def _iso_date(text: str) -> date:
         if result.isoformat() != text:
             raise ValueError("non-canonical date")
     except ValueError as exc:
-        raise argparse.ArgumentTypeError("use a valid date in YYYY-MM-DD format") from exc
+        raise argparse.ArgumentTypeError(
+            "use a valid date in YYYY-MM-DD format"
+        ) from exc
     return result
 
 
@@ -54,7 +56,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     """Parse options and print a plan; file/data errors return exit code one."""
     parser = argparse.ArgumentParser(description="Plan tonight's study time.")
     parser.add_argument("file", type=Path, help="CSV file containing W2 tasks")
-    parser.add_argument("--hours", type=float, required=True, help="Available study hours")
+    parser.add_argument(
+        "--hours", type=float, required=True, help="Available study hours"
+    )
     parser.add_argument(
         "--today",
         type=_iso_date,

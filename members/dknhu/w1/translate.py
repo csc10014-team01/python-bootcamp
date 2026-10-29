@@ -1,3 +1,6 @@
+"""Translate a rectangular matrix transpose into Python list comprehensions."""
+
+
 def transpose(matrix: list[list[int]]) -> list[list[int]]:
     """Return new rows made from the columns of a rectangular matrix.
 

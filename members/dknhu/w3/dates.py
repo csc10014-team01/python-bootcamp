@@ -3,7 +3,15 @@
 import re
 from datetime import date, timedelta
 
-WEEKDAYS = ("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday")
+WEEKDAYS = (
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "sunday",
+)
 
 
 def parse_due(text: str, today: date) -> date:
@@ -32,4 +40,6 @@ def parse_due(text: str, today: date) -> date:
     try:
         return today + timedelta(days=days)
     except OverflowError as exc:
-        raise ValueError(f"Deadline is outside the supported date range: {text!r}") from exc
+        raise ValueError(
+            f"Deadline is outside the supported date range: {text!r}"
+        ) from exc

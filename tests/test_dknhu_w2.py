@@ -17,12 +17,14 @@ HEADER = "title,importance,effort_h,deadline\n"
 
 
 @pytest.mark.parametrize("importance", [0, 6])
-def test_task_rejects_importance_outside_bounds(importance):
+def test_task_rejects_importance_outside_bounds(importance: int) -> None:
+    """Reject values immediately outside both importance boundaries."""
     with pytest.raises(ValueError, match="importance"):
         Task("Study", importance, 1, date(2026, 10, 30))
 
 
-def test_deadline_today_has_no_days_left():
+def test_deadline_today_has_no_days_left() -> None:
+    """A deadline today has zero remaining days."""
     today = date(2026, 10, 30)
     assert Task("Study", 1, 0, today).days_left(today) == 0
 
@@ -44,7 +46,8 @@ def test_deadline_today_has_no_days_left():
         '"unfinished',
     ],
 )
-def test_invalid_csv_rows_report_line_number(tmp_path, row):
+def test_invalid_csv_rows_report_line_number(tmp_path: Path, row: str) -> None:
+    """Identify the physical line of invalid values and malformed records."""
     source = tmp_path / "invalid.csv"
     source.write_text(HEADER + row + "\n", encoding="utf-8")
     with pytest.raises(ValueError, match="line 2"):
@@ -52,20 +55,23 @@ def test_invalid_csv_rows_report_line_number(tmp_path, row):
 
 
 @pytest.mark.parametrize("header", ["", "title,importance,deadline\n"])
-def test_invalid_csv_headers_report_line_one(tmp_path, header):
+def test_invalid_csv_headers_report_line_one(tmp_path: Path, header: str) -> None:
+    """Reject an empty file or incorrect columns at the header line."""
     source = tmp_path / "invalid.csv"
     source.write_text(header, encoding="utf-8")
     with pytest.raises(ValueError, match="line 1"):
         load_tasks(source)
 
 
-def test_header_only_csv_has_no_tasks(tmp_path):
+def test_header_only_csv_has_no_tasks(tmp_path: Path) -> None:
+    """A valid header with no records yields an empty task list."""
     source = tmp_path / "empty.csv"
     source.write_text(HEADER, encoding="utf-8")
     assert load_tasks(source) == []
 
 
-def test_error_line_counts_blank_lines_and_multiline_titles(tmp_path):
+def test_error_line_counts_blank_lines_and_multiline_titles(tmp_path: Path) -> None:
+    """Keep physical line numbers accurate across quoted and blank lines."""
     source = tmp_path / "multiline.csv"
     source.write_text(
         HEADER + '"Study\nnotes",3,1,2026-10-30\n\nBad,9,2,2026-10-30\n',
@@ -75,7 +81,8 @@ def test_error_line_counts_blank_lines_and_multiline_titles(tmp_path):
         load_tasks(source)
 
 
-def test_csv_and_json_preserve_unicode_dates_and_input_tasks(tmp_path):
+def test_csv_and_json_preserve_unicode_dates_and_input_tasks(tmp_path: Path) -> None:
+    """Round-trip Unicode/BOM input and ISO dates without mutating tasks."""
     source = tmp_path / "tasks.csv"
     source.write_text(
         HEADER + '"Ôn tập, Python",5,1.5,2026-10-30\n', encoding="utf-8-sig"
@@ -98,19 +105,22 @@ def test_csv_and_json_preserve_unicode_dates_and_input_tasks(tmp_path):
     assert isinstance(tasks[0].deadline, date)
 
 
-def test_save_empty_task_list(tmp_path):
+def test_save_empty_task_list(tmp_path: Path) -> None:
+    """Serialise an empty plan as an empty JSON array."""
     output = tmp_path / "empty.json"
     save_json([], output)
     assert json.loads(output.read_text(encoding="utf-8")) == []
 
 
-def test_exact_and_zero_budgets_are_feasible():
+def test_exact_and_zero_budgets_are_feasible() -> None:
+    """Accept an exact budget and an empty plan with no available time."""
     tasks = [Task("A", 1, 1.5, date(2026, 10, 30))]
     check_feasible(tasks, 1.5)
     check_feasible([], 0)
 
 
-def test_infeasible_plan_explains_both_hour_values():
+def test_infeasible_plan_explains_both_hour_values() -> None:
+    """Expose the shortfall through structured fields and a readable message."""
     tasks = [Task("A", 1, 1.5, date(2026, 10, 30))]
     with pytest.raises(InfeasiblePlan) as exc:
         check_feasible(tasks, 0.5)
@@ -118,7 +128,8 @@ def test_infeasible_plan_explains_both_hour_values():
     assert str(exc.value) == "Plan needs 1.5 h, but only 0.5 h are available."
 
 
-def test_module_cli_loads_sample_tasks():
+def test_module_cli_loads_sample_tasks() -> None:
+    """Execute the W2 package and load the repository's default sample."""
     result = subprocess.run(
         [sys.executable, "-m", "members.dknhu.w2"],
         cwd=BOOTCAMP,
@@ -133,7 +144,10 @@ def test_module_cli_loads_sample_tasks():
 
 
 @pytest.mark.parametrize("valid", [True, False])
-def test_module_cli_accepts_custom_csv_and_reports_errors(tmp_path, valid):
+def test_module_cli_accepts_custom_csv_and_reports_errors(
+    tmp_path: Path, valid: bool
+) -> None:
+    """Accept a custom CSV and report data errors without a traceback."""
     source = tmp_path / "custom.csv"
     source.write_text(
         HEADER + ("Custom,2,0,2026-10-30\n" if valid else "Bad,9,1,2026-10-30\n"),
