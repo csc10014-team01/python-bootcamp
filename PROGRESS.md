@@ -7,7 +7,7 @@
 | @AnhDuong1108 | w1 | 17 | 7 | @MariiiMariii-tech | N/A | 3 |
 | @MariiiMariii_tech | w1 | 21 | 18 | @Kongmink | N/A | 2 |
 | @Kongmink | w1 | 22 | 11 | @lehthuong2201-coder | N/A | 3 |
-| @lehthuong2201_coder | w1 | 16 | 9 | @nghi277 | N/A | 4 |
+| @lehthuong2201_coder | w3 | N/A | 38 | @nghi277 | N/A | 3 |
 
 
 > **Ghi chú:**
