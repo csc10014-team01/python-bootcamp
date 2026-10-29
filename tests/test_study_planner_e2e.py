@@ -17,14 +17,11 @@ from shared.study_planner.render import render
 BOOTCAMP = Path(__file__).resolve().parents[1]
 SAMPLE_CSV = BOOTCAMP / "samples" / "tasks.csv"
 TODAY = date(2026, 10, 26)
-EXPECTED_PLAN = (
-    "Study plan (7.5 h):\n"
-    "1. Assignment - 1.5 h\n"
-    "2. DS exam - 6.0 h"
-)
+EXPECTED_PLAN = "Study plan (7.5 h):\n1. Assignment - 1.5 h\n2. DS exam - 6.0 h"
 
 
-def test_sample_csv_pipeline_happy_path():
+def test_sample_csv_pipeline_happy_path() -> None:
+    """Load the sample through parsing, prioritising, allocation, and rendering."""
     tasks = parse_csv(SAMPLE_CSV)
     assert tasks == [
         Task("DS exam", 5, 6.0, date(2026, 10, 30)),
@@ -39,10 +36,9 @@ def test_sample_csv_pipeline_happy_path():
     assert render(blocks) == EXPECTED_PLAN
 
 
-def test_main_prints_sample_plan(capsys: pytest.CaptureFixture[str]):
-    exit_code = main(
-        [str(SAMPLE_CSV), "--hours", "7.5", "--today", TODAY.isoformat()]
-    )
+def test_main_prints_sample_plan(capsys: pytest.CaptureFixture[str]) -> None:
+    """Check the integrated command function's stdout and exit code."""
+    exit_code = main([str(SAMPLE_CSV), "--hours", "7.5", "--today", TODAY.isoformat()])
 
     captured = capsys.readouterr()
     assert exit_code == 0
@@ -51,7 +47,8 @@ def test_main_prints_sample_plan(capsys: pytest.CaptureFixture[str]):
 
 
 @pytest.mark.parametrize("hours", ["7.5", "10"], ids=["exact-budget", "spare-time"])
-def test_module_cli_prints_sample_plan(hours: str):
+def test_module_cli_prints_sample_plan(hours: str) -> None:
+    """Run the real module with exact and spare time budgets."""
     result = subprocess.run(
         [
             sys.executable,

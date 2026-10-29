@@ -7,6 +7,7 @@ from .io_utils import load_tasks
 
 
 def main() -> None:
+    """Read the optional CSV path and print each loaded task."""
     parser = argparse.ArgumentParser(description="Load a task CSV and print the tasks.")
     parser.add_argument(
         "path",

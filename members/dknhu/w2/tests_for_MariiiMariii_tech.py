@@ -25,11 +25,13 @@ from members.MariiiMariii_tech.w1 import (
         ([5], {"min": 5, "max": 5, "mean": 5, "median": 5}),
     ],
 )
-def test_summary(scores, expected):
+def test_summary(scores: list[float], expected: dict[str, float]) -> None:
+    """Check grade statistics for even, odd, and singleton inputs."""
     assert grades.summary(scores) == expected
 
 
-def test_summary_empty_raises_value_error():
+def test_summary_empty_raises_value_error() -> None:
+    """Require a useful error for an empty score list."""
     with pytest.raises(ValueError):
         grades.summary([])
 
@@ -44,7 +46,8 @@ def test_summary_empty_raises_value_error():
         (" \t\n.,!?;:", {}),
     ],
 )
-def test_word_count(text, expected):
+def test_word_count(text: str, expected: dict[str, int]) -> None:
+    """Check case folding, punctuation removal, and empty input."""
     assert text_tools.word_count(text) == expected
 
 
@@ -52,13 +55,18 @@ def test_word_count(text, expected):
     ("text", "k", "expected"),
     [
         ("Git is fun. Git is fast!", 2, [("git", 2), ("is", 2)]),
-        ("zebra apple zebra apple banana", 3, [("apple", 2), ("zebra", 2), ("banana", 1)]),
+        (
+            "zebra apple zebra apple banana",
+            3,
+            [("apple", 2), ("zebra", 2), ("banana", 1)],
+        ),
         ("", 3, []),
         ("one two", 0, []),
         ("one two one", 5, [("one", 2), ("two", 1)]),
     ],
 )
-def test_top_k(text, k, expected):
+def test_top_k(text: str, k: int, expected: list[tuple[str, int]]) -> None:
+    """Check frequency order, alphabetical ties, and k boundaries."""
     assert text_tools.top_k(text, k) == expected
 
 
@@ -73,25 +81,30 @@ def test_top_k(text, k, expected):
         (100, 1.5, False),
     ],
 )
-def test_can_register_thesis(credits, gpa, expected):
+def test_can_register_thesis(credits: int, gpa: float, expected: bool) -> None:
+    """Check both qualification boundaries and independent failures."""
     assert rules.can_register_thesis(credits, gpa) is expected
 
 
-def test_missing_when_eligible():
+def test_missing_when_eligible() -> None:
+    """Eligible students have no missing requirements."""
     assert rules.missing(120, 2.0) == []
 
 
-def test_missing_credits_only():
+def test_missing_credits_only() -> None:
+    """Report the exact credit shortfall when GPA is sufficient."""
     assert rules.missing(118, 3.1) == ["need 2 more credits"]
 
 
-def test_missing_gpa_only():
+def test_missing_gpa_only() -> None:
+    """Identify GPA as the sole unmet requirement."""
     reasons = rules.missing(120, 1.5)
     assert len(reasons) == 1
     assert "gpa" in reasons[0].lower()
 
 
-def test_missing_both_requirements():
+def test_missing_both_requirements() -> None:
+    """Report both credit and GPA requirements when both fail."""
     reasons = rules.missing(100, 1.5)
     assert len(reasons) == 2
     assert "need 20 more credits" in reasons
@@ -99,7 +112,8 @@ def test_missing_both_requirements():
 
 
 # W1-4, member 4: the required public function is named primes_up_to.
-def test_primes_up_to():
+def test_primes_up_to() -> None:
+    """Verify the instructor's required public API and prime boundaries."""
     primes_up_to = getattr(translate, "primes_up_to", None)
     assert callable(primes_up_to), (
         "tests/test_w1.py requires primes_up_to(n), but Mari's module only "
@@ -120,7 +134,8 @@ def test_primes_up_to():
 
 
 # W1-5: each input tuple is (course, day), as in the instructor's tests.
-def test_by_day_groups_and_sorts_courses():
+def test_by_day_groups_and_sorts_courses() -> None:
+    """Interpret each entry as course/day and sort courses per day."""
     schedule = [("CSC10014", "Mon"), ("MTH00003", "Tue"), ("CSC10001", "Mon")]
     assert timetable.by_day(schedule) == {
         "Mon": ["CSC10001", "CSC10014"],
@@ -128,11 +143,13 @@ def test_by_day_groups_and_sorts_courses():
     }
 
 
-def test_by_day_empty():
+def test_by_day_empty() -> None:
+    """An empty timetable produces no groups."""
     assert timetable.by_day([]) == {}
 
 
-def test_by_day_one_course_on_multiple_days():
+def test_by_day_one_course_on_multiple_days() -> None:
+    """Retain a course scheduled on distinct days."""
     assert timetable.by_day([("Python", "Mon"), ("Python", "Wed")]) == {
         "Mon": ["Python"],
         "Wed": ["Python"],

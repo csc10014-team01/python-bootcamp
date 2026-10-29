@@ -4,12 +4,16 @@ from .models import Task
 
 
 class InfeasiblePlan(Exception):
+    """Carry the required and available hours for an infeasible plan."""
+
     def __init__(self, needed_h: float, available_h: float) -> None:
+        """Store both hour values as attributes and exception arguments."""
         self.needed_h = needed_h
         self.available_h = available_h
         super().__init__(needed_h, available_h)
 
     def __str__(self) -> str:
+        """Describe the required hours and the available budget."""
         return (
             f"Plan needs {self.needed_h:g} h, "
             f"but only {self.available_h:g} h are available."

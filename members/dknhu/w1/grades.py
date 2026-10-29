@@ -1,5 +1,7 @@
+"""Compute grade statistics without mutating the input scores."""
 
-def summary(scores: list[float]) -> dict:
+
+def summary(scores: list[float]) -> dict[str, float]:
     """Return min, max, mean and median without changing scores."""
     if not scores:
         raise ValueError("Scores cannot be empty")
@@ -18,9 +20,4 @@ def summary(scores: list[float]) -> dict:
         middle2 = sorted_scores[n // 2]
         median = (middle1 + middle2) / 2
 
-    return {
-        "min": minimum,
-        "max": maximum,
-        "mean": mean,
-        "median": round(median, 2)
-    }
+    return {"min": minimum, "max": maximum, "mean": mean, "median": round(median, 2)}
