@@ -19,8 +19,8 @@ SAMPLE_CSV = BOOTCAMP / "samples" / "tasks.csv"
 TODAY = date(2026, 10, 26)
 EXPECTED_PLAN = (
     "Study plan (7.5 h):\n"
-    "1. DS exam - 6.0 h\n"
-    "2. Assignment - 1.5 h"
+    "1. Assignment - 1.5 h\n"
+    "2. DS exam - 6.0 h"
 )
 
 
@@ -35,7 +35,7 @@ def test_sample_csv_pipeline_happy_path():
     assert ordered_tasks == [tasks[1], tasks[0]]
 
     blocks = allocate(ordered_tasks, 7.5)
-    assert blocks == [Block(tasks[0], 6.0), Block(tasks[1], 1.5)]
+    assert blocks == [Block(tasks[1], 1.5), Block(tasks[0], 6.0)]
     assert render(blocks) == EXPECTED_PLAN
 
 
